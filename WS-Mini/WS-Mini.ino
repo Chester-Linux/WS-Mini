@@ -41,6 +41,7 @@ void setup() {
 }
 
 void loop() {
+  // BMP180
   char status;
   double T,P,p0,a;
 
@@ -55,7 +56,6 @@ void loop() {
   Serial.println("Provided altitude: " + String(ALTITUDE,0) + " meters, " + String(ALTITUDE*3.28084,0) + " feet");
 
   Serial1.println();
-  Serial1.println("BMP180#");
   Serial1.println("Provided altitude: " + String(ALTITUDE,0) + " meters, " + String(ALTITUDE*3.28084,0) + " feet");
   
   // If you want to measure altitude, and not pressure, you will instead need
@@ -102,7 +102,6 @@ void loop() {
         {
           // Print out the measurement:
           Serial.println("Absolute pressure: " + String(P,2) + " mb, " + String(P*0.0295333727,2) + " inHg");
-
           Serial1.println("Absolute pressure: " + String(P,2) + " mb, " + String(P*0.0295333727,2) + " inHg");
           
           // The pressure sensor returns abolute pressure, which varies with altitude.
@@ -113,7 +112,6 @@ void loop() {
 
           p0 = pressure.sealevel(P,ALTITUDE); // we're at 1655 meters (Boulder, CO)
           Serial.println("Relative (sea-level) pressure: " + String(p0,2) + " mb, " + String(p0*0.0295333727,2) + " inHg");
-
           Serial1.println("Relative (sea-level) pressure: " + String(p0,2) + " mb, " + String(p0*0.0295333727,2) + " inHg");
           
           // On the other hand, if you want to determine your altitude from the pressure reading,
@@ -123,7 +121,6 @@ void loop() {
 
           a = pressure.altitude(P,p0);
           Serial.println("Computed altitude: " + String(a,0) + " meters, " + (a*3.28084,0) + " feet");
-
           Serial1.println("Computed altitude: " + String(a,0) + " meters, " + (a*3.28084,0) + " feet");
 
         }
@@ -148,7 +145,8 @@ void loop() {
     Serial.println("error starting temperature measurement\n");
     }
 
-  // read humidity and temperature
+
+  // DHT22
   float humi  = dht22.readHumidity();
   float temp = dht22.readTemperature();
 
@@ -167,7 +165,6 @@ void loop() {
     Serial.println();
 
     Serial1.println();
-    Serial1.println("DHT22#");
     Serial1.println("Temperature: " + String(temp) + "°C" + " // " + ((9.0/5.0)*temp+32.0,2) + "F°");
     Serial1.println("Humidity: " + String(humi) + "%");
     Serial1.println();
@@ -175,47 +172,56 @@ void loop() {
   }
 
   // Lê e armazena o valor do pino digital
-val_d = digitalRead(pino_d);
+  val_d = digitalRead(pino_d);
 
-// Lê e armazena o valor do pino analógico
-val_a = analogRead(pino_a);
+  // Lê e armazena o valor do pino analógico
+  val_a = analogRead(pino_a);
 
-// Envia as informações para o Serial Monitor
-Serial.print("Valor digital : ");
-Serial.print(val_d);
-Serial.print(" - Valor analogico : ");
-Serial.println(val_a);
+  // Envia as informações para o Serial Monitor
+  Serial.print("Valor digital : ");
+  Serial.print(val_d);
+  Serial.print(" - Valor analogico : ");
+  Serial.println(val_a);
 
-// Mostra no Serial se há chuva ou não
-if (val_d == 1)
-{
-  Serial.println("Chuva: Nao");
-}
-else
-{
-  Serial.println("Chuva: Sim");
-}
+  Serial.println("YL-83#");
+  Serial.println("");
 
-// Mostra no Serial o nível de intensidade da chuva
-if (val_a > 900 && val_a <= 1023)
-{
-  Serial.println("Intensidade: ---- (Nenhuma)");
-}
-else if (val_a > 700 && val_a <= 900)
-{
-  Serial.println("Intensidade: Fraca");
-}
-else if (val_a > 500 && val_a <= 700)
-{
-  Serial.println("Intensidade: Moderada");
-}
-else if (val_a <= 500)
-{
-  Serial.println("Intensidade: Forte");
-}
+  // Mostra no Serial se há chuva ou não
+  if (val_d == 1)
+  {
+    Serial.println("Chuva: Nao");
+    Serial1.println("Chuva: Nao");
+  }
+  else
+  {
+    Serial.println("Chuva: Sim");
+    Serial1.println("Chuva: Sim");
+  }
 
-// Separador para facilitar a leitura no monitor serial
-Serial.println("--------------------------");
+  // Mostra no Serial o nível de intensidade da chuva
+  if (val_a > 900 && val_a <= 1023)
+  {
+    Serial.println("Intensidade: ---- (Nenhuma)");
+    Serial1.println("Intensidade: ---- (Nenhuma)");
+  }
+  else if (val_a > 700 && val_a <= 900)
+  {
+    Serial.println("Intensidade: Fraca");
+    Serial1.println("Intensidade: Fraca");
+  }
+  else if (val_a > 500 && val_a <= 700)
+  {
+    Serial.println("Intensidade: Moderada");
+    Serial1.println("Intensidade: Moderada");
+  }
+  else if (val_a <= 500)
+  {
+    Serial.println("Intensidade: Forte");
+    Serial1.println("Intensidade: Forte");   
+  }
+
+  // Separador para facilitar a leitura no monitor serial
+  Serial.println("--------------------------");
 
   delay(2000);
 }
