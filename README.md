@@ -8,7 +8,7 @@ use o código "sudo chmod a+rw /dev/ttyACM0" no terminal
 
 
 *Arduino Nano Every Board pinout*
-![image](https://github.com/user-attachments/assets/dd583514-e4bd-473a-b25b-cf479ec1e7c4)
+![image](https://github.com/user-attachments/assets/14db0c91-d2f8-4ff9-93ad-5c4b487d180f)
 
 
 
