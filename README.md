@@ -21,3 +21,7 @@ BMP180-https://randomnerdtutorials.com/guide-for-bmp180-barometric-sensor-with-a
 HC-05-https://www.instructables.com/Interfacing-HC-05-Bluetooth-Module-With-Arduino/
 
 YL-83-https://www.makerhero.com/blog/sensor-de-chuva-yl-83/
+
+https://www.thingiverse.com/thing:2766305
+
+https://www.thingiverse.com/thing:5022998
